@@ -3,8 +3,6 @@ package br.pucrs;
 import java.util.ArrayList;
 import java.util.Random;
 
-import org.w3c.dom.css.Counter;
-
 public class App 
 {
 
@@ -19,23 +17,30 @@ public class App
         nOp.add(32);
         nOp.add(2048);
         nOp.add(1048576);
+        int[] vet = null;
         for(int nOpe : nOp) {
-            int[] vet = geraVetor(nOpe, nOpe);
+            nOpAtual = nOpe;
+            vet = geraVetor(nOpe, nOpe);
             vet = merge_sort(vet);
         }
         contador.toCSV("merge_sort");
 
-        contador.startAgain();
+        contador = new Contador();
+        vet = geraVetor(10, 10);
+        nOpAtual = 20;
         int maxVal = maxVal1(vet, vet.length);
         contador.toCSV("maxVal1");
         System.out.println("Maior valor: " + maxVal);
 
         contador.startAgain();
+        vet = geraVetor(10, 10);
+        nOpAtual = 20;
         System.out.println("Maior valor: " + maxVal2(vet, 0, vet.length - 1));
         contador.toCSV("maxVal2");
 
 
         contador.startAgain();
+        nOpAtual = 64;
         System.out.println("Multiplicação: " + Multiply(1844674407370955161L, 1844674407370955161L, 64));
         contador.toCSV("Multiply");
     }
@@ -132,7 +137,6 @@ public class App
                 vet[i+j] = right[j];
                 j++;
             }
-            op++;
         }
 
         while(i < left.length) {
@@ -159,20 +163,19 @@ public class App
         if ((nroPares >= 0) ||
                 (nroImpares >= 0) &&
                 (nroPares + nroImpares > 0)) {
-                    contador.increment(nOpAtual);
+
             res = new int[nroPares + nroImpares];
 
             while ((contPar < nroPares) || (contImpar < nroImpares)) {
-                contador.increment(nOpAtual);
                 novoNum = rnd.nextInt(98)+1;
 
                 if ((novoNum % 2 == 0) && (contPar < nroPares)) {
-                    contador.increment(nOpAtual);
+
                     res[contPar+contImpar] = novoNum;
                     contPar++;
                 }
                 else if ((novoNum % 2 == 1) && (contImpar < nroImpares)) {
-                    contador.increment(nOpAtual);
+
                     res[contPar+contImpar] = novoNum;
                     contImpar++;
                 }

@@ -1,4 +1,7 @@
+package br.pucrs;
+
 import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.util.HashMap;
 
 public class Contador {
@@ -7,11 +10,16 @@ public class Contador {
 
     public void toCSV(String filename){
         filename = filename + ".csv";
-        BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
-        writer.write("n,counter\n");
-        for (Integer n : this.nAndCounters.keySet()) {
-            writer.write(n + "," + this.nAndCounters.get(n) + "\n");
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))){
+            
+            writer.write("n,counter\n");
+            for (Integer n : this.nAndCounters.keySet()) {
+                writer.write(n + "," + this.nAndCounters.get(n) + "\n");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        
     }
 
     public Contador() {
